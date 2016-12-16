@@ -1,0 +1,30 @@
+<div class="container">
+
+<div class="row controls-container">
+    <input type="text" ng-model="name">
+
+    <label ng-class="{ 'switch-label-on' : courierStatus }" class="switch-label">{{ courierStatus ? 'ON' : 'OFF' }}</label>
+    <md-switch ng-disabled="switchDisabled"
+    class="md-primary"
+    ng-change="toggleCourier()"
+    ng-model="courierStatus"
+    md-no-ink aria-label="Switch">
+    </md-switch>
+</div>
+
+<ng-map default-style="true" center="current-location" zoom="16">
+  <info-window id="foo" position="current-location">
+
+    <marker ng-repeat="courier in couriers track by courier.$id"
+    label="{{courier.name}}"
+    position="{{courier.location[0]}}, {{courier.location[1]}}"
+    icon="{{courier.icon}}">
+  </marker>
+
+  <!--<marker ng-if="courierStatus" label="{{name}}" position="{{latitude}}, {{longitude}}"
+  icon="">
+</marker>-->
+</info-window>
+</ng-map>
+
+</div>
